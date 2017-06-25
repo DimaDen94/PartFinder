@@ -1,6 +1,7 @@
 package com.denejkodlj.partfinder.Activity;
 
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -28,9 +29,10 @@ public class LoginActivity extends AppCompatActivity {
         sing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(check(login.getText().toString(),password.getText().toString())){
 
-                }
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+
             }
         });
 

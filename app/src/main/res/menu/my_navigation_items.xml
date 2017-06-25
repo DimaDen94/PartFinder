@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="1"
+        android:id="@+id/myPage"
         android:title="myPage" />
     <item
-        android:id="2"
+        android:id="@+id/Parts"
         android:title="Parts" />
     <item
-        android:id="3"
+        android:id="@+id/myPart"
         android:title="myPart" />
     <item
-        android:id="4"
+        android:id="@+id/reatedParts"
         android:title="createdParts" />
     <item
-        android:id="5"
+        android:id="@+id/complParts"
         android:title="complParts" />
 </menu>
