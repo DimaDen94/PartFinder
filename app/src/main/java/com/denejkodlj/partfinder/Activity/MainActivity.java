@@ -52,11 +52,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.myPage:
                 Log.i("inform","case");
                 fTrans.replace(contId, fragmentMyPage).commit();
-                //fTrans.commit();
                 break;
             case R.id.parts:
                 fTrans.replace(R.id.container, fragmentPartsList).commit();
-                //fTrans.commit();
                 break;
         }
         return true;

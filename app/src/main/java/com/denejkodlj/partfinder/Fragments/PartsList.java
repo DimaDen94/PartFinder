@@ -6,20 +6,35 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.denejkodlj.partfinder.R;
+import com.denejkodlj.partfinder.adapter.FragmentAdapter;
+import com.denejkodlj.partfinder.adapter.PartsListAdapter;
+import com.denejkodlj.partfinder.data.Part;
+import com.denejkodlj.partfinder.data.User;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 
-public class PartsList extends ListFragment {
-    String data[] = new String[] { "one", "two", "three", "four" };
+public class PartsList extends AbstractFragment {
+    private ArrayList<Part> parts;
+    private Context context;
+    private PartsListAdapter adapter;
+    private RecyclerView recyclerView;
+    private GridLayoutManager mLayoutManager;
 
     public static PartsList newInstance(Context context) {
         PartsList fragment = new PartsList();
         Bundle args = new Bundle();
+        fragment.setContext(context);
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,8 +55,28 @@ public class PartsList extends ListFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, data);
-        setListAdapter(adapter);
+        mockParts();
+        adapter = new PartsListAdapter(context,parts);
+        recyclerView = (RecyclerView) getView().findViewById(R.id.recyclerView);
+        mLayoutManager = new GridLayoutManager(context, 1);
+
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+
+    }
+    void mockParts(){
+        parts = new ArrayList<>();
+
+        //User vasya = new User("Вася", "Васьков", "+380 99 213 1456", "Студент, в хорошей физическо форме, могу выполнять тяжелую физическую работу");
+        //User nik = new User("Николай", "Даньков", "+380 99 213 1457", "Студент, готов выполнять курьерские задание. Имею велосипед.");
+        User petr = new User("Петр", "Верис", "+380 99 213 1459", "Хозяин строительного участка");
+
+        Part courier = new Part("Доставка","Доставить ключи с Греческой на Софиевскую", 30,petr,new Date());
+        Part handyman = new Part("Работа на стройке","Работа на строительном обьекте. Ройка траншей, уборка, разгрузка и погрузка материала.", 300,petr,new Date());
+
+        parts.add(courier);
+        parts.add(handyman);
+
     }
 }
