@@ -1,29 +1,64 @@
 package com.denejkodlj.partfinder.Activity;
 
-import android.support.v4.app.Fragment;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 
 import com.denejkodlj.partfinder.Fragments.MyPage;
 import com.denejkodlj.partfinder.Fragments.PartsList;
 import com.denejkodlj.partfinder.Fragments.UserPage;
 import com.denejkodlj.partfinder.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private DrawerLayout drawerLayout;
-    MyPage fragmentMyPage;
-    PartsList fragmentPartsList;
-    UserPage fragmentUserPage;
+
+    //fragments
+    private MyPage fragmentMyPage;
+    private PartsList fragmentPartsList;
+
+    private int contId = R.id.container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
-    void initNavigationView(){
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+        initNavigationView();
+        FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
+
+        fragmentMyPage = MyPage.newInstance(this);
+        fragmentPartsList = PartsList.newInstance(this);
+
+
+        fTrans.add(R.id.container, fragmentMyPage).commit();
+
+    }
+
+    void initNavigationView() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
+        Log.i("inform","on navigation");
+        switch (item.getItemId()) {
+            case R.id.myPage:
+                Log.i("inform","case");
+                fTrans.replace(contId, fragmentMyPage).commit();
+                //fTrans.commit();
+                break;
+            case R.id.parts:
+                fTrans.replace(R.id.container, fragmentPartsList).commit();
+                //fTrans.commit();
+                break;
+        }
+        return true;
     }
 }

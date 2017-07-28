@@ -4,15 +4,15 @@
         android:id="@+id/myPage"
         android:title="myPage" />
     <item
-        android:id="@+id/Parts"
+        android:id="@+id/parts"
         android:title="Parts" />
     <item
         android:id="@+id/myPart"
         android:title="myPart" />
     <item
-        android:id="@+id/reatedParts"
+        android:id="@+id/createdParts"
         android:title="createdParts" />
     <item
-        android:id="@+id/complParts"
-        android:title="complParts" />
+        android:id="@+id/complectedParts"
+        android:title="complectedParts" />
 </menu>

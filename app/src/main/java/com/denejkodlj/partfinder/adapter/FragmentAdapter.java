@@ -26,7 +26,7 @@ public class FragmentAdapter extends FragmentPagerAdapter {
         this.context = context;
         tabs  = new HashMap<>();
         tabs.put(0, MyPage.newInstance(context));
-        tabs.put(1, PartsList.newInstance(context));
+        //tabs.put(1, PartsList.newInstance(context));
         tabs.put(2, UserPage.newInstance(context));
     }
 
