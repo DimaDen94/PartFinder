@@ -9,17 +9,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.denejkodlj.partfinder.Fragments.Form;
 import com.denejkodlj.partfinder.Fragments.MyPage;
 import com.denejkodlj.partfinder.Fragments.PartsList;
 import com.denejkodlj.partfinder.Fragments.UserPage;
 import com.denejkodlj.partfinder.R;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, PartsList.FABListener {
 
 
     //fragments
     private MyPage fragmentMyPage;
     private PartsList fragmentPartsList;
+    private Form fragmentForm;
 
     private int contId = R.id.container;
 
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         fragmentMyPage = MyPage.newInstance(this);
         fragmentPartsList = PartsList.newInstance(this);
+        fragmentForm = Form.newInstance(this);
 
 
         fTrans.add(R.id.container, fragmentMyPage).commit();
@@ -58,5 +61,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void someEvent() {
+        FragmentTransaction fTrans = getSupportFragmentManager().beginTransaction();
+        fTrans.replace(contId, fragmentForm).commit();
     }
 }

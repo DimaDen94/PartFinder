@@ -1,9 +1,11 @@
 package com.denejkodlj.partfinder.Fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -31,6 +33,12 @@ public class PartsList extends AbstractFragment {
     private RecyclerView recyclerView;
     private GridLayoutManager mLayoutManager;
 
+    public interface FABListener {
+        public void someEvent();
+    }
+    FloatingActionButton button;
+    FABListener fABListener;
+
     public static PartsList newInstance(Context context) {
         PartsList fragment = new PartsList();
         Bundle args = new Bundle();
@@ -43,6 +51,15 @@ public class PartsList extends AbstractFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+    }
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            fABListener = (FABListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement onSomeEventListener");
+        }
     }
 
     @Override
@@ -64,7 +81,19 @@ public class PartsList extends AbstractFragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
+
+
+        button = (FloatingActionButton) getView().findViewById(R.id.floatingActionButton);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fABListener.someEvent();
+            }
+        });
     }
+
+
     void mockParts(){
         parts = new ArrayList<>();
 
