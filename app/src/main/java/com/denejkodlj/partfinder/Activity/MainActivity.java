@@ -6,8 +6,10 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatMultiAutoCompleteTextView;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.denejkodlj.partfinder.Fragments.Form;
 import com.denejkodlj.partfinder.Fragments.MyPage;
@@ -24,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Form fragmentForm;
 
     private int contId = R.id.container;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
